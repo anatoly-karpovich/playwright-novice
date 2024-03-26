@@ -16,3 +16,7 @@ export interface IProductFromResponse extends IProduct {
 export interface IProductResponse {
   Product: IProductFromResponse;
 }
+
+export interface IProductsResponse {
+  Products: IProductFromResponse[];
+}

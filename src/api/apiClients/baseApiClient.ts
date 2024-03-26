@@ -1,9 +1,8 @@
-// import fieldsToHideInReport from "../../data/fieldsToHideInReport.js";
+import fieldsToHideInReport from "../../data/report/fieldsToHideInReport.js";
 import { IRequestOptions, IResponse } from "../../types/api/apiClient.types.js";
-// import { Logger } from "../../utils/logger/loggers/baseLogger.js";
-// import { hideValueInObject } from "../../utils/object/index.js";
-// import { BaseReporter } from "../../utils/reporter/baseReporter.js";
-import { logApiStep } from "../../utils/reporter/logApiStep.js";
+import { hideValueInObject } from "../../utils/object/index.js";
+import { logApiStep } from "../../utils/reporter/decorators/logApiStep.js";
+import { BaseReporter } from "../../utils/reporter/reporters/baseReporter.js";
 
 export abstract class BaseApiClient {
   protected response;
@@ -32,7 +31,7 @@ export abstract class BaseApiClient {
   protected abstract logError(error: any): void;
 
   // constructor(private reporterService: BaseReporter, private loggerService: Logger) {}
-  constructor() {}
+  constructor(private reporterService: BaseReporter) {}
 
   /**
    * Sends request with provided request IRequestOptions and returns response as IResponse interface
@@ -61,12 +60,10 @@ export abstract class BaseApiClient {
   }
 
   private secureCheck() {
-    // fieldsToHideInReport.forEach((f) => this.options && hideValueInObject(this.options, f));
+    fieldsToHideInReport.forEach((f) => this.options && hideValueInObject(this.options, f));
   }
 
   private logRequest() {
-    // this.reporterService.reportApiRequest(this.options!, this.response);
-    // this.loggerService.logApiRequest(JSON.stringify(this.options));
-    // this.loggerService.logApiResponse(JSON.stringify(this.response));
+    this.reporterService.reportApiRequest(this.options!, this.response);
   }
 }

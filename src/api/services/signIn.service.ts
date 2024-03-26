@@ -2,8 +2,10 @@ import { IRequestOptions, IResponse, RequestParams } from "../../types/api/apiCl
 import { ILoginResponse, IUserCredentials } from "../../types/user/user.types.js";
 import { apiConfig } from "../config/apiConfig.js";
 import apiClient from "../apiClients/apiClient.js";
+import { logStep } from "../../utils/reporter/decorators/logStep.js";
 
 class SignInService {
+  @logStep("Sign in via API")
   async login(params: RequestParams<IUserCredentials>): Promise<IResponse<ILoginResponse>> {
     const options: IRequestOptions = {
       url: apiConfig.baseURL + apiConfig.endpoints.Login,

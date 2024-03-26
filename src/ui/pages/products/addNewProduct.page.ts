@@ -6,6 +6,7 @@ import { SalesPortalPage } from "../salesPortal.page.js";
 import { validateResponse } from "../../../utils/validations/apiValidation.js";
 import { HTTP_STATUS_CODES } from "../../../data/http/statusCodes.js";
 import { Products } from "../../../utils/entities/index.js";
+import { logStep } from "../../../utils/reporter/decorators/logStep.js";
 
 export class AddNewProductPage extends SalesPortalPage {
   readonly "Name input" = this.findElement(`#inputName`);
@@ -15,6 +16,7 @@ export class AddNewProductPage extends SalesPortalPage {
   readonly "Notes input" = this.findElement(`#textareaNotes`);
   readonly "Save New Product button" = this.findElement(`#save-new-product`);
 
+  @logStep("Fill in New Product inputs")
   async fillProductInputs(product: IProduct) {
     await this.setValue(this["Name input"], product.name);
     await this.selectDropdownValue(this["Manufacturer dropdown"], product.manufacturer);
@@ -26,10 +28,12 @@ export class AddNewProductPage extends SalesPortalPage {
     }
   }
 
+  @logStep(`Click on Save New Product button`)
   async clickOnSaveNewProductButton() {
     await this.click(this["Save New Product button"]);
   }
 
+  @logStep("Create New Product")
   async createProduct(product: IProduct) {
     await this.fillProductInputs(product);
     const response = await this.interceptCreateProductResponse();

@@ -7,7 +7,7 @@ import { Products } from "../../../utils/entities/index.js";
 const test = mergeTests(testPageFactory, testProduct);
 
 test.describe("test", () => {
-  test.skip("Temp test to check how it works", async ({ salesPortal, createProductViaApi, getProduct }) => {
+  test("[Products]. [Open details modal for created product]", async ({ salesPortal, createProductViaApi }) => {
     await salesPortal.signInPage.openSalesPortal();
     await salesPortal.signInPage.signInAsAdmin();
     const product = await createProductViaApi();

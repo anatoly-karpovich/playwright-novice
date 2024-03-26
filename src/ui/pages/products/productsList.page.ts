@@ -1,3 +1,4 @@
+import { logStep } from "../../../utils/reporter/decorators/logStep.js";
 import { SalesPortalPage } from "../salesPortal.page.js";
 
 export class ProductsListPage extends SalesPortalPage {
@@ -12,21 +13,25 @@ export class ProductsListPage extends SalesPortalPage {
   readonly "Edit button by product name" = (productName: string) => this.findElement(`${this["Actions by product name selector"](productName)}/button[@title="Edit"]`);
   readonly "Delete button by product name" = (productName: string) => this.findElement(`${this["Actions by product name selector"](productName)}/button[@title="Delete"]`);
 
+  @logStep("Open Add New Product Page")
   async openAddNewProductPage() {
     await this["Add new product button"].click();
     await this.waitForPageIsLoaded();
   }
 
+  @logStep("Open Product Details Modal")
   async openDetailsModalForCreatedProduct(productName: string) {
     await this.click(this["Details button by product name"](productName));
     await this.waitForPageIsLoaded();
-    await this.page.pause();
   }
 
+  @logStep("Open Edit Product Modal")
   async openEditProductModalForCreatedProduct(productName: string) {
     await this.click(this["Edit button by product name"](productName));
     await this.waitForPageIsLoaded();
   }
+
+  @logStep("Open Delete Product Modal")
   async openDeleteProductModalForCreatedProduct(productName: string) {
     await this.click(this["Delete button by product name"](productName));
     await this.waitForPageIsLoaded();

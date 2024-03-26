@@ -1,6 +1,7 @@
 import { BasePage } from "./basePage.page";
 import { URL } from "../../config/environment";
 import { TIMEOUT_10_SEC } from "../../utils/timeouts";
+import { logStep } from "../../utils/reporter/decorators/logStep";
 
 export class SalesPortalPage extends BasePage {
   readonly "Notification message" = this.findElement(`.toast-body`);
@@ -19,6 +20,7 @@ export class SalesPortalPage extends BasePage {
     return token;
   }
 
+  @logStep("Open Sales Portal")
   async openSalesPortal() {
     await this.openPage(URL);
   }

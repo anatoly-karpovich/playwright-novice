@@ -2,8 +2,8 @@ import { Locator, Page } from "@playwright/test";
 import { ElementState, IWaitUntilOptions, ResizeCoordinates } from "../../types/core/actions.types.js";
 import { DEFAULT_TIMEOUT, TIMEOUT_10_SEC } from "../../utils/timeouts.js";
 import { isLocator, isLocatorArray } from "../../utils/typeGuards/selector.js";
-import find from "../../utils/array/find.js";
 import { IResponse } from "../../types/api/apiClient.types.js";
+import { logStep } from "../../utils/reporter/decorators/logStep.js";
 
 export class BasePage {
   constructor(protected page: Page) {}
@@ -58,6 +58,7 @@ export class BasePage {
     }
   }
 
+  @logStep()
   async click(selector: string | Locator, timeout?: number) {
     try {
       const element = await this.waitForElementAndScroll(selector, timeout);
@@ -67,6 +68,7 @@ export class BasePage {
     }
   }
 
+  @logStep()
   async setValue(selector: string | Locator, text: string, timeout?: number) {
     try {
       const element = await this.waitForElementAndScroll(selector, timeout);
@@ -78,6 +80,7 @@ export class BasePage {
     }
   }
 
+  @logStep()
   async clear(selector: string | Locator, timeout?: number) {
     try {
       const element = await this.waitForElementAndScroll(selector, timeout);
@@ -89,17 +92,20 @@ export class BasePage {
     }
   }
 
+  @logStep()
   async getText(selector: string | Locator, timeout?: number) {
     const element = await this.waitForElementAndScroll(selector, timeout);
     const text = await element.innerText({ timeout });
     return text;
   }
 
+  @logStep()
   async selectDropdownValue(dropdownSelector: string | Locator, optionName: string, timeout?: number) {
     const dropdown = this.findElement(dropdownSelector);
     await dropdown.selectOption(optionName, { timeout });
   }
 
+  @logStep()
   async openPage(url: string) {
     try {
       await this.page.goto(url, { waitUntil: "domcontentloaded" });
@@ -108,11 +114,13 @@ export class BasePage {
     }
   }
 
+  @logStep()
   async hoverElement(selector: string | Locator, timeout?: number) {
     const element = await this.waitForElementAndScroll(selector, timeout);
     await element.hover({ timeout });
   }
 
+  @logStep()
   async dragAndDrop(elementSelector: string | Locator, targetSelector: string | Locator, timeout?: number) {
     const sourceElement = await this.waitForElementAndScroll(elementSelector, timeout);
     const targetElement = await this.waitForElementAndScroll(targetSelector, timeout);
@@ -133,6 +141,7 @@ export class BasePage {
     }
   }
 
+  @logStep()
   async resizeElement(selector: string | Locator, coordinates: ResizeCoordinates, timeout?: number) {
     const element = await this.waitForElementAndScroll(selector);
 
@@ -160,6 +169,7 @@ export class BasePage {
     return this.page.waitForResponse(url);
   }
 
+  @logStep()
   async interceptResponse<T>(url: string, triggerAction?: () => Promise<void>): Promise<IResponse<T>> {
     if (triggerAction) {
       const [response] = await Promise.all([this.waitForResponse(url), triggerAction()]);

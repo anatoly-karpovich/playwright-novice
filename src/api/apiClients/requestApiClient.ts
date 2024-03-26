@@ -1,8 +1,6 @@
-import axios, { AxiosRequestConfig } from "axios";
-import { APIRequestContext, APIResponse, request, test } from "@playwright/test";
+import { request } from "@playwright/test";
 import { BaseApiClient } from "./baseApiClient.js";
-import FormData from "form-data";
-
+import ReporterService from "../../utils/reporter/reporters/reporter.js";
 class RequestApiClient extends BaseApiClient {
   protected async send() {
     const apiContext = await request.newContext();
@@ -32,4 +30,4 @@ class RequestApiClient extends BaseApiClient {
   }
 }
 
-export default new RequestApiClient();
+export default new RequestApiClient(ReporterService);
