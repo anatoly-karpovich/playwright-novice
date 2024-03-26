@@ -1,9 +1,11 @@
 import { IRequestOptions, IResponse, Id, RequestParams } from "../../types/api/apiClient.types.js";
-import { IProduct, IProductResponse } from "../../types/products/product.types.js";
+import { IProduct, IProductResponse, IProductsResponse } from "../../types/products/product.types.js";
 import { apiConfig } from "../config/apiConfig.js";
 import apiClient from "../apiClients/apiClient.js";
+import { logStep } from "../../utils/reporter/decorators/logStep.js";
 
 class ProductsService {
+  @logStep("Get product via API")
   async get(params: RequestParams<Id>) {
     const options: IRequestOptions = {
       url: apiConfig.baseURL + apiConfig.endpoints["Product By Id"](params.data._id),
@@ -16,7 +18,8 @@ class ProductsService {
     return apiClient.sendRequest(options);
   }
 
-  async getAll(params: Partial<RequestParams<Id>>) {
+  @logStep("Get all products via API")
+  async getAll(params: Partial<RequestParams<Id>>): Promise<IResponse<IProductsResponse>> {
     const options: IRequestOptions = {
       url: apiConfig.baseURL + apiConfig.endpoints.Products,
       options: {
@@ -28,6 +31,7 @@ class ProductsService {
     return apiClient.sendRequest(options);
   }
 
+  @logStep("Create product via API")
   async create(params: RequestParams<IProduct>): Promise<IResponse<IProductResponse>> {
     const options: IRequestOptions = {
       url: apiConfig.baseURL + apiConfig.endpoints.Products,
@@ -41,6 +45,7 @@ class ProductsService {
     return apiClient.sendRequest(options);
   }
 
+  @logStep("Update product via API")
   async update(params: RequestParams<IProduct>) {
     const options: IRequestOptions = {
       url: apiConfig.baseURL + apiConfig.endpoints.Products,
@@ -54,6 +59,7 @@ class ProductsService {
     return apiClient.sendRequest(options);
   }
 
+  @logStep("Delete product via API")
   async delete(params: RequestParams<Id>): Promise<IResponse<null>> {
     const options: IRequestOptions = {
       url: apiConfig.baseURL + apiConfig.endpoints["Product By Id"](params.data._id),
