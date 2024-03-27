@@ -10,3 +10,5 @@ export const test = base.extend<ServicesFixture>({
     await use(new SalesPortalServices());
   },
 });
+
+export { expect } from "@playwright/test";

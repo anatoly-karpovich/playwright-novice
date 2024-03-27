@@ -1,12 +1,12 @@
 import { IRequestOptions, IResponse, Id, RequestParams } from "../../types/api/apiClient.types.js";
-import { IProduct, IProductResponse, IProductsResponse } from "../../types/products/product.types.js";
+import { IProduct, IProductFromResponse, IProductResponse, IProductsResponse } from "../../types/products/product.types.js";
 import { apiConfig } from "../config/apiConfig.js";
 import apiClient from "../apiClients/apiClient.js";
 import { logStep } from "../../utils/reporter/decorators/logStep.js";
 
 class ProductsService {
   @logStep("Get product via API")
-  async get(params: RequestParams<Id>) {
+  async getById(params: RequestParams<Id>) {
     const options: IRequestOptions = {
       url: apiConfig.baseURL + apiConfig.endpoints["Product By Id"](params.data._id),
       options: {
@@ -15,11 +15,11 @@ class ProductsService {
       },
       requestType: "json",
     };
-    return apiClient.sendRequest(options);
+    return apiClient.sendRequest<IProductResponse>(options);
   }
 
   @logStep("Get all products via API")
-  async getAll(params: Partial<RequestParams<Id>>): Promise<IResponse<IProductsResponse>> {
+  async getAll(params: Partial<RequestParams<Id>>) {
     const options: IRequestOptions = {
       url: apiConfig.baseURL + apiConfig.endpoints.Products,
       options: {
@@ -28,11 +28,11 @@ class ProductsService {
       },
       requestType: "json",
     };
-    return apiClient.sendRequest(options);
+    return apiClient.sendRequest<IProductsResponse>(options);
   }
 
   @logStep("Create product via API")
-  async create(params: RequestParams<IProduct>): Promise<IResponse<IProductResponse>> {
+  async create(params: RequestParams<IProduct>) {
     const options: IRequestOptions = {
       url: apiConfig.baseURL + apiConfig.endpoints.Products,
       options: {
@@ -42,11 +42,11 @@ class ProductsService {
       },
       requestType: "json",
     };
-    return apiClient.sendRequest(options);
+    return apiClient.sendRequest<IProductResponse>(options);
   }
 
   @logStep("Update product via API")
-  async update(params: RequestParams<IProduct>) {
+  async update(params: RequestParams<IProductFromResponse>) {
     const options: IRequestOptions = {
       url: apiConfig.baseURL + apiConfig.endpoints.Products,
       options: {
@@ -56,11 +56,11 @@ class ProductsService {
       },
       requestType: "json",
     };
-    return apiClient.sendRequest(options);
+    return apiClient.sendRequest<IProductResponse>(options);
   }
 
   @logStep("Delete product via API")
-  async delete(params: RequestParams<Id>): Promise<IResponse<null>> {
+  async delete(params: RequestParams<Id>) {
     const options: IRequestOptions = {
       url: apiConfig.baseURL + apiConfig.endpoints["Product By Id"](params.data._id),
       options: {
@@ -70,7 +70,7 @@ class ProductsService {
       },
       requestType: "json",
     };
-    return apiClient.sendRequest(options);
+    return apiClient.sendRequest<null>(options);
   }
 }
 

@@ -6,7 +6,7 @@ import { logStep } from "../../utils/reporter/decorators/logStep.js";
 
 class SignInService {
   @logStep("Sign in via API")
-  async login(params: RequestParams<IUserCredentials>): Promise<IResponse<ILoginResponse>> {
+  async login(params: RequestParams<IUserCredentials>) {
     const options: IRequestOptions = {
       url: apiConfig.baseURL + apiConfig.endpoints.Login,
       options: {

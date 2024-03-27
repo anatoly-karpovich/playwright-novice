@@ -1,5 +1,6 @@
 import { BaseReporter } from "./baseReporter.js";
 import { allure } from "allure-playwright";
+import * as rimraf from "rimraf";
 
 class AllureReporter extends BaseReporter {
   protected async reportApiRequestData(): Promise<void> {
@@ -19,6 +20,10 @@ class AllureReporter extends BaseReporter {
   attachLog(log: string) {
     // allure.addAttachment("Test Log", log, "text/plain");
     //TBD
+  }
+
+  clearReportResults() {
+    rimraf.sync("src/report/allure-results");
   }
 }
 

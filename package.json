@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:ui": "npx playwright test --config=src/config/playwright.config.ts",
+    "test:ui": "cross-env TESTS=UI HEADLESS=false npx playwright test --config=src/config/playwright.config.ts",
+    "test:api": "cross-env TESTS=API HEADLESS=true npx playwright test --config=src/config/playwright.config.ts",
     "report-pw-open": "npx playwright show-report",
     "report-create": "allure generate src/report/allure-results -o src/report/allure-report --clean",
     "report-open": "npm run report-create && allure open src/report/allure-report"
@@ -20,6 +21,8 @@
   "dependencies": {
     "@faker-js/faker": "^8.4.1",
     "ajv": "^8.12.0",
-    "dotenv": "^16.4.5"
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.4.5",
+    "rimraf": "^5.0.5"
   }
 }

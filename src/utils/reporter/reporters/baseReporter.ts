@@ -20,6 +20,11 @@ export abstract class BaseReporter {
   public abstract attachLog(log: string): void;
 
   /**
+   * Clears report results folder, e.g. allure-results for Allure reporter
+   */
+  public abstract clearReportResults(): void;
+
+  /**
    * Attaches request and response data to report
    * @param requestOptions Request options provided to api client
    * @param response Response received from api client
