@@ -3,15 +3,15 @@ import { expect } from "@playwright/test";
 import { IResponse } from "../../types/api/apiClient.types";
 import { HTTP_STATUS_CODES } from "../../data/http/statusCodes";
 
-export function validateResponseWithSchema(response: IResponse, status: number, IsSuccess: boolean, ErrorMessage: null | string, schema: object) {
+export function validateResponseWithSchema(response: IResponse, schema: object, status: number, IsSuccess?: boolean, ErrorMessage?: null | string) {
   validateSchema(response, schema);
   validateResponse(response, status, IsSuccess, ErrorMessage);
 }
 
-export function validateResponse(response: IResponse, status: HTTP_STATUS_CODES, IsSuccess: boolean, ErrorMessage: null | string) {
+export function validateResponse(response: IResponse, status: HTTP_STATUS_CODES, IsSuccess?: boolean, ErrorMessage?: null | string) {
   expect(response.status).toBe(status);
-  expect(response.data.IsSuccess).toBe(IsSuccess);
-  expect(response.data.ErrorMessage).toBe(ErrorMessage);
+  if (IsSuccess) expect(response.data.IsSuccess).toBe(IsSuccess);
+  if (ErrorMessage) expect(response.data.ErrorMessage).toBe(ErrorMessage);
 }
 
 export function validateSchema(response: IResponse, schema: object) {

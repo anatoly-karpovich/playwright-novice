@@ -14,7 +14,8 @@ dotenv.config();
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: "../ui/tests",
+  globalSetup: require.resolve("./global-setup"),
+  testDir: process.env.TESTS === "UI" ? "../ui/tests" : "../api/tests",
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -50,7 +51,7 @@ export default defineConfig({
   projects: [
     {
       name: "chromium",
-      use: { ...devices["Desktop Chrome"], headless: false },
+      use: { ...devices["Desktop Chrome"], headless: process.env.HEADLESS === "true" },
     },
 
     // {
