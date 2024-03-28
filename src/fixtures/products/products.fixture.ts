@@ -1,8 +1,8 @@
-import { IProduct, IProductFromResponse } from "../../types/products/product.types.js";
-import { generateNewProduct } from "../../data/products/productGeneration.js";
-import { test as base, expect } from "../common/services.fixture.js";
-import { Users } from "../../utils/entities/index.js";
-import { HTTP_STATUS_CODES } from "../../data/http/statusCodes.js";
+import { IProduct, IProductFromResponse } from "types/products/product.types";
+import { generateNewProduct } from "data/products/productGeneration";
+import { test as base, expect } from "fixtures/common/services.fixture";
+import { Users } from "utils/entities/index";
+import { HTTP_STATUS_CODES } from "data/http/statusCodes";
 
 interface ProductFixture {
   createProductViaApi: (product?: IProduct, token?: string) => Promise<IProductFromResponse>;

@@ -1,4 +1,4 @@
-import { IRequestOptions, IResponse } from "../../../types/api/apiClient.types";
+import { IRequestOptions, IResponse } from "types/api/apiClient.types";
 
 export abstract class BaseReporter {
   protected requestOptions: IRequestOptions | undefined;

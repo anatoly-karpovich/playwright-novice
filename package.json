@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "rimraf dist && npx tsc",
     "test:ui": "cross-env TESTS=UI HEADLESS=false npx playwright test --config=src/config/playwright.config.ts",
     "test:api": "cross-env TESTS=API HEADLESS=true npx playwright test --config=src/config/playwright.config.ts",
     "report-pw-open": "npx playwright show-report",

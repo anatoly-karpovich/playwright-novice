@@ -1,4 +1,4 @@
-import { hideSecretData } from "../string/index.js";
+import { hideSecretData } from "utils/string/index.js";
 
 export function updateValueInObject(obj: any, keyToFind: string, newValue: Function) {
   for (const key in obj) {

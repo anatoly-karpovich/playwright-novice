@@ -1,5 +1,5 @@
-import { BaseApiClient } from "./baseApiClient";
-import requestApiClient from "./requestApiClient";
+import { BaseApiClient } from "api/apiClients/baseApiClient";
+import requestApiClient from "api/apiClients/requestApiClient";
 
 const clients: Record<string, BaseApiClient> = {
   request: requestApiClient,

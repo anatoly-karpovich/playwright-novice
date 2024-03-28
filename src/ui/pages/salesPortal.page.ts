@@ -1,7 +1,7 @@
-import { BasePage } from "./basePage.page";
-import { URL } from "../../config/environment";
-import { TIMEOUT_10_SEC } from "../../utils/timeouts";
-import { logStep } from "../../utils/reporter/decorators/logStep";
+import { BasePage } from "ui/pages/basePage.page";
+import { URL } from "config/environment";
+import { TIMEOUT_10_SEC } from "utils/timeouts";
+import { logStep } from "utils/reporter/decorators/logStep";
 
 export class SalesPortalPage extends BasePage {
   async waitForSpinnerToHide() {

@@ -1,10 +1,10 @@
-import { generateNewProduct } from "../../../data/products/productGeneration.js";
-import { expect, test } from "../../../fixtures/common/services.fixture.js";
-import { ADMIN_PASSWORD, ADMIN_USERNAME } from "../../../config/environment.js";
-import { IProductFromResponse } from "../../../types/products/product.types.js";
-import { validateResponseWithSchema } from "../../../utils/validations/apiValidation.js";
-import { createdProductSchema } from "../../../data/schema/product.schema.js";
-import { HTTP_STATUS_CODES } from "../../../data/http/statusCodes.js";
+import { generateNewProduct } from "data/products/productGeneration";
+import { expect, test } from "fixtures/common/services.fixture";
+import { ADMIN_PASSWORD, ADMIN_USERNAME } from "config/environment";
+import { IProductFromResponse } from "types/products/product.types";
+import { validateResponseWithSchema } from "utils/validations/apiValidation";
+import { createdProductSchema } from "data/schema/product.schema";
+import { HTTP_STATUS_CODES } from "data/http/statusCodes";
 
 test.describe("[API]. [Products]", () => {
   const createdProducts: IProductFromResponse[] = [];

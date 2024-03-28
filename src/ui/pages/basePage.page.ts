@@ -1,9 +1,9 @@
 import { Locator, Page } from "@playwright/test";
-import { ElementState, IWaitUntilOptions, ResizeCoordinates } from "../../types/core/actions.types.js";
-import { DEFAULT_TIMEOUT, TIMEOUT_10_SEC } from "../../utils/timeouts.js";
-import { isLocator, isLocatorArray } from "../../utils/typeGuards/selector.js";
-import { IResponse } from "../../types/api/apiClient.types.js";
-import { logStep } from "../../utils/reporter/decorators/logStep.js";
+import { ElementState, IWaitUntilOptions, ResizeCoordinates } from "types/core/actions.types";
+import { DEFAULT_TIMEOUT, TIMEOUT_10_SEC } from "utils/timeouts";
+import { isLocator, isLocatorArray } from "utils/typeGuards/selector";
+import { IResponse } from "types/api/apiClient.types";
+import { logStep } from "utils/reporter/decorators/logStep";
 
 export class BasePage {
   // readonly "Notification message" = this.findElement(`.toast-body`);

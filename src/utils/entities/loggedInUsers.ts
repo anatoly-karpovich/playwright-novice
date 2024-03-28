@@ -1,4 +1,4 @@
-import { ILoginResponse } from "../../types/user/user.types";
+import { ILoginResponse } from "types/user/user.types";
 
 interface ILoggedInUser {
   username: string;

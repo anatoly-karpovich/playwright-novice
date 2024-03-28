@@ -1,7 +1,7 @@
-import fieldsToHideInReport from "../../data/report/fieldsToHideInReport.js";
-import { IRequestOptions, IResponse } from "../../types/api/apiClient.types.js";
-import { hideValueInObject } from "../../utils/object/index.js";
-import { BaseReporter } from "../../utils/reporter/reporters/baseReporter.js";
+import fieldsToHideInReport from "data/report/fieldsToHideInReport";
+import { IRequestOptions, IResponse } from "types/api/apiClient.types";
+import { hideValueInObject } from "utils/object/index";
+import { BaseReporter } from "utils/reporter/reporters/baseReporter";
 
 export abstract class BaseApiClient {
   protected response: any;

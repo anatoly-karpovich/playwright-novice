@@ -1,6 +1,6 @@
 import { request } from "@playwright/test";
-import { BaseApiClient } from "./baseApiClient.js";
-import ReporterService from "../../utils/reporter/reporters/reporter.js";
+import { BaseApiClient } from "api/apiClients/baseApiClient";
+import ReporterService from "utils/reporter/reporters/reporter";
 class RequestApiClient extends BaseApiClient {
   protected async send() {
     const apiContext = await request.newContext();

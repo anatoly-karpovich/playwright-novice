@@ -1,12 +1,10 @@
-import { expect } from "@playwright/test";
-import { apiConfig } from "../../../api/config/apiConfig.js";
-import { IResponse } from "../../../types/api/apiClient.types.js";
-import { IProduct, IProductResponse } from "../../../types/products/product.types.js";
-import { SalesPortalPage } from "../salesPortal.page.js";
-import { validateResponse } from "../../../utils/validations/apiValidation.js";
-import { HTTP_STATUS_CODES } from "../../../data/http/statusCodes.js";
-import { Products } from "../../../utils/entities/index.js";
-import { logStep } from "../../../utils/reporter/decorators/logStep.js";
+import { apiConfig } from "api/config/apiConfig";
+import { IProduct, IProductResponse } from "types/products/product.types";
+import { SalesPortalPage } from "ui/pages/salesPortal.page";
+import { validateResponse } from "utils/validations/apiValidation";
+import { HTTP_STATUS_CODES } from "data/http/statusCodes";
+import { Products } from "utils/entities/index";
+import { logStep } from "utils/reporter/decorators/logStep";
 
 export class AddNewProductPage extends SalesPortalPage {
   readonly "Name input" = this.findElement(`#inputName`);

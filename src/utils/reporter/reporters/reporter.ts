@@ -1,5 +1,5 @@
-import allure from "./allure.js";
-import { BaseReporter } from "./baseReporter.js";
+import allure from "utils/reporter/reporters/allure";
+import { BaseReporter } from "utils/reporter/reporters/baseReporter";
 
 const reporterServices: Record<string, BaseReporter> = {
   allure,

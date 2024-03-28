@@ -1,4 +1,4 @@
-import { BaseReporter } from "./baseReporter.js";
+import { BaseReporter } from "utils/reporter/reporters/baseReporter";
 import { allure } from "allure-playwright";
 import * as rimraf from "rimraf";
 
