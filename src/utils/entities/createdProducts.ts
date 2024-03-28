@@ -1,4 +1,4 @@
-import type { IProductFromResponse, IProductResponse } from "../../types/products/product.types.js";
+import type { IProductFromResponse } from "types/products/product.types.js";
 
 export class CreatedProducts {
   private static instance: CreatedProducts;

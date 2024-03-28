@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "rimraf dist && npx tsc",
     "test:ui": "cross-env TESTS=UI HEADLESS=false npx playwright test --config=src/config/playwright.config.ts",
     "test:api": "cross-env TESTS=API HEADLESS=true npx playwright test --config=src/config/playwright.config.ts",
     "report-pw-open": "npx playwright show-report",
@@ -16,7 +17,8 @@
   "devDependencies": {
     "@playwright/test": "^1.42.1",
     "@types/node": "^20.11.28",
-    "allure-playwright": "^2.15.0"
+    "allure-playwright": "^2.15.0",
+    "typescript": "^5.4.3"
   },
   "dependencies": {
     "@faker-js/faker": "^8.4.1",

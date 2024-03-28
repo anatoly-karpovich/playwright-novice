@@ -1,12 +1,9 @@
-import { BasePage } from "./basePage.page";
-import { URL } from "../../config/environment";
-import { TIMEOUT_10_SEC } from "../../utils/timeouts";
-import { logStep } from "../../utils/reporter/decorators/logStep";
+import { BasePage } from "ui/pages/basePage.page";
+import { URL } from "config/environment";
+import { TIMEOUT_10_SEC } from "utils/timeouts";
+import { logStep } from "utils/reporter/decorators/logStep";
 
 export class SalesPortalPage extends BasePage {
-  readonly "Notification message" = this.findElement(`.toast-body`);
-  readonly "Spinner" = this.findElement(".spinner-border");
-
   async waitForSpinnerToHide() {
     await this.waitForElement(this.Spinner, "hidden", TIMEOUT_10_SEC);
   }
@@ -15,9 +12,10 @@ export class SalesPortalPage extends BasePage {
     await this.waitForSpinnerToHide();
   }
 
-  async getAuthorizationToken(): Promise<string> {
-    const token = await this.getCoockies({ url: URL, cookieName: "Authorization" });
-    return token;
+  async getAuthorizationToken() {
+    const cookies = await this.getCookies(URL);
+    const token = cookies.find((cookie) => cookie.name === "Authorization");
+    return token?.value;
   }
 
   @logStep("Open Sales Portal")

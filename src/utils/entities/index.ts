@@ -1,5 +1,5 @@
-import { CreatedProducts } from "./createdProducts.js";
-import { LoggedInUsers } from "./loggedInUsers.js";
+import { CreatedProducts } from "utils/entities/createdProducts.js";
+import { LoggedInUsers } from "utils/entities/loggedInUsers.js";
 
 const Products = new CreatedProducts();
 const Users = new LoggedInUsers();

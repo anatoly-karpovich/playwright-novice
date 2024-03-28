@@ -1,11 +1,13 @@
 import { Locator, Page } from "@playwright/test";
-import { ElementState, IWaitUntilOptions, ResizeCoordinates } from "../../types/core/actions.types.js";
-import { DEFAULT_TIMEOUT, TIMEOUT_10_SEC } from "../../utils/timeouts.js";
-import { isLocator, isLocatorArray } from "../../utils/typeGuards/selector.js";
-import { IResponse } from "../../types/api/apiClient.types.js";
-import { logStep } from "../../utils/reporter/decorators/logStep.js";
+import { ElementState, IWaitUntilOptions, ResizeCoordinates } from "types/core/actions.types";
+import { DEFAULT_TIMEOUT, TIMEOUT_10_SEC } from "utils/timeouts";
+import { isLocator, isLocatorArray } from "utils/typeGuards/selector";
+import { IResponse } from "types/api/apiClient.types";
+import { logStep } from "utils/reporter/decorators/logStep";
 
 export class BasePage {
+  // readonly "Notification message" = this.findElement(`.toast-body`);
+  readonly "Spinner" = this.findElement(".spinner-border");
   constructor(protected page: Page) {}
 
   findElement(selectorOrElement: string | Locator) {
@@ -169,7 +171,6 @@ export class BasePage {
     return this.page.waitForResponse(url);
   }
 
-  @logStep()
   async interceptResponse<T>(url: string, triggerAction?: () => Promise<void>): Promise<IResponse<T>> {
     if (triggerAction) {
       const [response] = await Promise.all([this.waitForResponse(url), triggerAction()]);
@@ -183,25 +184,25 @@ export class BasePage {
     return response.json();
   }
 
-  async checkNotificationWithText(text: string) {
-    let expectedNotification: Locator | undefined;
-    await this.waitUntil(
-      async () => {
-        const notifications = await this.findElementArray(this["Notification message"]);
-        for (const n of notifications) {
-          let actualText = await this.getText(n);
-          if (text === actualText) {
-            expectedNotification = n;
-            await this.click(n);
-            await this.waitForElement(n, "hidden");
-            break;
-          }
-        }
-        return !!expectedNotification;
-      },
-      { timeoutMsg: `Notification message with text "${text}" was not found` }
-    );
-  }
+  // async checkNotificationWithText(text: string) {
+  //   let expectedNotification: Locator | undefined;
+  //   await this.waitUntil(
+  //     async () => {
+  //       const notifications = await this.findElementArray(this["Notification message"]);
+  //       for (const n of notifications) {
+  //         let actualText = await this.getText(n);
+  //         if (text === actualText) {
+  //           expectedNotification = n;
+  //           await this.click(n);
+  //           await this.waitForElement(n, "hidden");
+  //           break;
+  //         }
+  //       }
+  //       return !!expectedNotification;
+  //     },
+  //     { timeoutMsg: `Notification message with text "${text}" was not found` }
+  //   );
+  // }
 
   async waitForElementToChangeText(selector: string | Locator, text: string, timeout = DEFAULT_TIMEOUT) {
     await this.waitUntil(
@@ -223,8 +224,8 @@ export class BasePage {
     });
   }
 
-  async getCoockies(options: { url?: string; cookieName?: string }) {
-    const cookies = await this.page.context().cookies();
-    return options.cookieName ? cookies[options.cookieName] : cookies;
+  async getCookies(url: string) {
+    const cookies = await this.page.context().cookies(url);
+    return cookies;
   }
 }

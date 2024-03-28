@@ -1,5 +1,5 @@
 import { test as base } from "@playwright/test";
-import { Application } from "./application.js";
+import { Application } from "fixtures/common/application";
 
 interface PageFactoryFixture {
   salesPortal: Application;

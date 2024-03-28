@@ -1,8 +1,8 @@
-import { IRequestOptions, IResponse, RequestParams } from "../../types/api/apiClient.types.js";
-import { ILoginResponse, IUserCredentials } from "../../types/user/user.types.js";
-import { apiConfig } from "../config/apiConfig.js";
-import apiClient from "../apiClients/apiClient.js";
-import { logStep } from "../../utils/reporter/decorators/logStep.js";
+import { IRequestOptions, IResponse, RequestParams } from "types/api/apiClient.types";
+import { ILoginResponse, IUserCredentials } from "types/user/user.types";
+import { apiConfig } from "api/config/apiConfig";
+import apiClient from "api/apiClients/apiClient";
+import { logStep } from "utils/reporter/decorators/logStep";
 
 class SignInService {
   @logStep("Sign in via API")

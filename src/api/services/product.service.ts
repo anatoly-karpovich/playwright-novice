@@ -1,8 +1,8 @@
-import { IRequestOptions, IResponse, Id, RequestParams } from "../../types/api/apiClient.types.js";
-import { IProduct, IProductFromResponse, IProductResponse, IProductsResponse } from "../../types/products/product.types.js";
-import { apiConfig } from "../config/apiConfig.js";
-import apiClient from "../apiClients/apiClient.js";
-import { logStep } from "../../utils/reporter/decorators/logStep.js";
+import { IRequestOptions, Id, RequestParams } from "types/api/apiClient.types";
+import { IProduct, IProductFromResponse, IProductResponse, IProductsResponse } from "types/products/product.types";
+import { apiConfig } from "api/config/apiConfig";
+import apiClient from "api/apiClients/apiClient";
+import { logStep } from "utils/reporter/decorators/logStep";
 
 class ProductsService {
   @logStep("Get product via API")

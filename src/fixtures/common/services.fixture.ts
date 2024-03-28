@@ -1,5 +1,5 @@
 import { test as base } from "@playwright/test";
-import { SalesPortalServices } from "../../api/services/index.js";
+import { SalesPortalServices } from "api/services/index";
 
 interface ServicesFixture {
   services: SalesPortalServices;

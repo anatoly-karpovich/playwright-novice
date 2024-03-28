@@ -1,8 +1,8 @@
-import { IProduct, IProductFromResponse } from "../../types/products/product.types.js";
-import { generateNewProduct } from "../../data/products/productGeneration.js";
-import { test as base, expect } from "../common/services.fixture.js";
-import { Users } from "../../utils/entities/index.js";
-import { HTTP_STATUS_CODES } from "../../data/http/statusCodes.js";
+import { IProduct, IProductFromResponse } from "types/products/product.types";
+import { generateNewProduct } from "data/products/productGeneration";
+import { test as base, expect } from "fixtures/common/services.fixture";
+import { Users } from "utils/entities/index";
+import { HTTP_STATUS_CODES } from "data/http/statusCodes";
 
 interface ProductFixture {
   createProductViaApi: (product?: IProduct, token?: string) => Promise<IProductFromResponse>;
@@ -16,13 +16,14 @@ export const test = base.extend<ProductFixture>({
     let createdProduct;
     const createdProductViaApi = async (product?: IProduct, token?: string) => {
       const data = generateNewProduct(product);
-      createdProduct = await services.ProductService.create({ data, token: token ?? Users.getToken() });
-      expect(createdProduct.status).toBe(HTTP_STATUS_CODES.CREATED);
-      return createdProduct.data.Product;
+      const response = await services.ProductService.create({ data, token: token ?? Users.getToken() });
+      expect(response.status).toBe(HTTP_STATUS_CODES.CREATED);
+      createdProduct = response.data.Product;
+      return response.data.Product;
     };
 
     await use(createdProductViaApi);
-    await services.ProductService.delete({ data: { _id: createdProduct._id }, token: Users.getToken() });
+    if (createdProduct) await services.ProductService.delete({ data: { _id: (createdProduct as IProductFromResponse)._id }, token: Users.getToken() });
   },
 
   getProductById: async ({ services }, use) => {

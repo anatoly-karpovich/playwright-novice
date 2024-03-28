@@ -1,4 +1,4 @@
-import { MaybePromise, AsyncCallback } from "../../types/data/functions.types";
+import { MaybePromise, AsyncCallback } from "types/data/functions.types";
 
 /**
  * finds value in array by provided predicate

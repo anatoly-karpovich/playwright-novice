@@ -1,13 +1,11 @@
-import fieldsToHideInReport from "../../data/report/fieldsToHideInReport.js";
-import { IRequestOptions, IResponse } from "../../types/api/apiClient.types.js";
-import { hideValueInObject } from "../../utils/object/index.js";
-import { logApiStep } from "../../utils/reporter/decorators/logApiStep.js";
-import { BaseReporter } from "../../utils/reporter/reporters/baseReporter.js";
+import fieldsToHideInReport from "data/report/fieldsToHideInReport";
+import { IRequestOptions, IResponse } from "types/api/apiClient.types";
+import { hideValueInObject } from "utils/object/index";
+import { BaseReporter } from "utils/reporter/reporters/baseReporter";
 
 export abstract class BaseApiClient {
-  protected response;
-  protected options: IRequestOptions;
-  protected request;
+  protected response: any;
+  protected options: IRequestOptions | null;
 
   /**
    * Transforms requestOptions from IRequestOptions to satisfy the api client options type based on the requestType field of requestOptions
@@ -31,14 +29,15 @@ export abstract class BaseApiClient {
   protected abstract logError(error: any): void;
 
   // constructor(private reporterService: BaseReporter, private loggerService: Logger) {}
-  constructor(private reporterService: BaseReporter) {}
+  constructor(private reporterService: BaseReporter) {
+    this.options = null;
+  }
 
   /**
    * Sends request with provided request IRequestOptions and returns response as IResponse interface
    * @param initOptions Request options like url, method and etc from IRequestOptions interface
    * @returns
    */
-  @logApiStep()
   async sendRequest<T>(initOptions: IRequestOptions): Promise<IResponse<T>> {
     try {
       this.options = initOptions;
@@ -54,16 +53,16 @@ export abstract class BaseApiClient {
       this.transformResponse();
     } finally {
       this.secureCheck();
-      this.logRequest();
+      await this.logRequest();
     }
     return this.response;
   }
 
   private secureCheck() {
-    fieldsToHideInReport.forEach((f) => this.options && hideValueInObject(this.options, f));
+    fieldsToHideInReport.forEach((fieldToHide) => this.options && hideValueInObject(this.options, fieldToHide));
   }
 
-  private logRequest() {
-    this.reporterService.reportApiRequest(this.options!, this.response);
+  private async logRequest() {
+    await this.reporterService.reportApiRequest(this.options!, this.response);
   }
 }

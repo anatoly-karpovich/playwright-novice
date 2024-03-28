@@ -1,3 +1,3 @@
-import { hideValueInObject, updateValueInObject } from "./updateValue.js";
+import { hideValueInObject, updateValueInObject } from "utils/object/updateValue.js";
 
-export { hideValueInObject, updateValueInObject }
+export { hideValueInObject, updateValueInObject };

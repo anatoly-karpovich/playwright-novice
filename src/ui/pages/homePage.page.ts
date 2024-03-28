@@ -1,5 +1,5 @@
-import { logStep } from "../../utils/reporter/decorators/logStep.js";
-import { SalesPortalPage } from "./salesPortal.page.js";
+import { logStep } from "utils/reporter/decorators/logStep";
+import { SalesPortalPage } from "ui/pages/salesPortal.page";
 
 export class HomePage extends SalesPortalPage {
   readonly "Products button" = this.findElement("#products-from-home");

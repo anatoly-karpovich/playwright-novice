@@ -1,4 +1,4 @@
-import { MaybePromise, AsyncCallback, Settings } from "../../types/data/functions.types";
+import { MaybePromise, AsyncCallback, Settings } from "types/data/functions.types";
 
 /**
  * iterate async array and returns new array with results

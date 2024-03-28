@@ -1,9 +1,9 @@
-import { ADMIN_USERNAME, ADMIN_PASSWORD } from "../../config/environment.js";
-import { ILoginResponse, IUserCredentials } from "../../types/user/user.types.js";
-import { SalesPortalPage } from "./salesPortal.page.js";
-import { Users } from "../../utils/entities/index.js";
-import { apiConfig } from "../../api/config/apiConfig.js";
-import { logStep } from "../../utils/reporter/decorators/logStep.js";
+import { ADMIN_USERNAME, ADMIN_PASSWORD } from "config/environment";
+import { ILoginResponse, IUserCredentials } from "types/user/user.types";
+import { SalesPortalPage } from "./salesPortal.page";
+import { Users } from "utils/entities/index";
+import { apiConfig } from "api/config/apiConfig";
+import { logStep } from "utils/reporter/decorators/logStep";
 
 export class SignInPage extends SalesPortalPage {
   readonly "Email input" = this.findElement("#emailinput");

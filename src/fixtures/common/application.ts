@@ -1,8 +1,8 @@
 import { Page } from "@playwright/test";
-import { HomePage } from "../../ui/pages/homePage.page";
-import { ProductsListPage } from "../../ui/pages/products/productsList.page";
-import { AddNewProductPage } from "../../ui/pages/products/addNewProduct.page";
-import { SignInPage } from "../../ui/pages/signInPage.page";
+import { HomePage } from "ui/pages/homePage.page";
+import { ProductsListPage } from "ui/pages/products/productsList.page";
+import { AddNewProductPage } from "ui/pages/products/addNewProduct.page";
+import { SignInPage } from "ui/pages/signInPage.page";
 
 export class Application {
   constructor(protected page: Page) {}

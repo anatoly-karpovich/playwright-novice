@@ -1,8 +1,8 @@
-import allure from "./allure.js";
-import { BaseReporter } from "./baseReporter.js";
+import allure from "utils/reporter/reporters/allure";
+import { BaseReporter } from "utils/reporter/reporters/baseReporter";
 
-const reporterServices = {
-  allure: allure,
+const reporterServices: Record<string, BaseReporter> = {
+  allure,
 };
 
-export default reporterServices[process.env.FRAMEWORK || "allure"] as BaseReporter;
+export default reporterServices[process.env.REPORTER || "allure"];

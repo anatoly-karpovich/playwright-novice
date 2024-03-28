@@ -1,8 +1,8 @@
 import { mergeTests } from "@playwright/test";
-import { test as testProduct } from "../../../fixtures/products/products.fixture.js";
-import { test as testPageFactory } from "../../../fixtures/common/pageFactory.fixture.js";
-import { generateNewProduct } from "../../../data/products/productGeneration.js";
-import { Products } from "../../../utils/entities/index.js";
+import { test as testProduct } from "fixtures/products/products.fixture";
+import { test as testPageFactory } from "fixtures/common/pageFactory.fixture";
+import { generateNewProduct } from "data/products/productGeneration";
+import { Products } from "utils/entities/index";
 
 const test = mergeTests(testPageFactory, testProduct);
 
