@@ -16,7 +16,7 @@ export class SignInPage extends SalesPortalPage {
     await this.setValue(this["Password input"], credentials?.password ?? ADMIN_PASSWORD);
     const token = await this.clickSignInAndGetTokenFromResponse();
     await this.waitForPageIsLoaded();
-    Users.setUser(ADMIN_USERNAME, { token });
+    Users.setUser(ADMIN_USERNAME, { token: token });
   }
 
   @logStep("Sign In as Admin")
