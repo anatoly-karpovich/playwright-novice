@@ -4,7 +4,7 @@ import ReporterService from "../../utils/reporter/reporters/reporter.js";
 class RequestApiClient extends BaseApiClient {
   protected async send() {
     const apiContext = await request.newContext();
-    const resp = await apiContext.fetch(this.options.url, this.options.options);
+    const resp = await apiContext.fetch(this.options!.url, this.options!.options);
     apiContext.dispose();
     return resp;
   }
@@ -17,7 +17,7 @@ class RequestApiClient extends BaseApiClient {
 
   protected async transformResponse() {
     const transformedResponse = {
-      data: this.options.options.method === "delete" ? null : await this.response.json(),
+      data: this.options!.options.method === "delete" ? null : await this.response.json(),
       status: this.response.status(),
       headers: this.response.headers(),
     };
@@ -26,7 +26,7 @@ class RequestApiClient extends BaseApiClient {
 
   protected logError(error: any) {
     console.log("Error", error.message);
-    console.log("Request URL:", this.options.options.method, this.options?.url);
+    console.log("Request URL:", this.options!.options.method, this.options?.url);
   }
 }
 

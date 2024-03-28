@@ -1,6 +1,6 @@
 import { hideSecretData } from "../string/index.js";
 
-export function updateValueInObject(obj: object, keyToFind: string, newValue: Function) {
+export function updateValueInObject(obj: any, keyToFind: string, newValue: Function) {
   for (const key in obj) {
     if (typeof obj[key] === "object" && obj[key] !== null) {
       // If the current property is an object, recursively search inside it

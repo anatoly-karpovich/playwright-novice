@@ -16,13 +16,14 @@ export const test = base.extend<ProductFixture>({
     let createdProduct;
     const createdProductViaApi = async (product?: IProduct, token?: string) => {
       const data = generateNewProduct(product);
-      createdProduct = await services.ProductService.create({ data, token: token ?? Users.getToken() });
-      expect(createdProduct.status).toBe(HTTP_STATUS_CODES.CREATED);
-      return createdProduct.data.Product;
+      const response = await services.ProductService.create({ data, token: token ?? Users.getToken() });
+      expect(response.status).toBe(HTTP_STATUS_CODES.CREATED);
+      createdProduct = response.data.Product;
+      return response.data.Product;
     };
 
     await use(createdProductViaApi);
-    await services.ProductService.delete({ data: { _id: createdProduct._id }, token: Users.getToken() });
+    if (createdProduct) await services.ProductService.delete({ data: { _id: (createdProduct as IProductFromResponse)._id }, token: Users.getToken() });
   },
 
   getProductById: async ({ services }, use) => {
