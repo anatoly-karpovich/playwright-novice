@@ -12,17 +12,15 @@ jobs:
           node-version: lts/*
 
       # Set environment variables
-      - name: Set environment variables
-        with: # Set the secret as an input
-          ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
-          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
-          TESTS: ${{ secrets.TESTS }}
-          HEADLESS: ${{ secrets.HEADLESS }}
-          REPORTER: ${{ secrets.REPORTER }}
-          API_CLIENT: ${{ secrets.API_CLIENT }}
-      # Install dependencies
-      - name: Install dependencies
-        run: npm ci
+      - name: Set environment variables and install dependencies
+        run: |
+          npm ci
+          export ADMIN_EMAIL="${{ secrets.ADMIN_EMAIL }}"
+          export ADMIN_PASSWORD="${{ secrets.ADMIN_PASSWORD }}"
+          export TESTS="${{ secrets.TESTS }}"
+          export HEADLESS="${{ secrets.HEADLESS }}"
+          export REPORTER="${{ secrets.REPORTER }}"
+          export API_CLIENT="${{ secrets.API_CLIENT }}"
 
       # Install browsers
       - name: Install Playwright Browsers
