@@ -18,13 +18,13 @@ jobs:
 
       # Set environment variables
       - name: Set environment variables
-        run: |
-          echo "ADMIN_EMAIL=${{ secrets.ADMIN_EMAIL }}" >> $GITHUB_ENV
-          echo "ADMIN_PASSWORD=${{ secrets.ADMIN_PASSWORD }}" >> $GITHUB_ENV
-          echo "TESTS=${{ secrets.TESTS }}" >> $GITHUB_ENV
-          echo "HEADLESS=${{ secrets.HEADLESS }}" >> $GITHUB_ENV
-          echo "REPORTER=${{ secrets.REPORTER }}" >> $GITHUB_ENV
-          echo "API_CLIENT=${{ secrets.API_CLIENT }}" >> $GITHUB_ENV
+        with: # Set the secret as an input
+          ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+          TESTS: ${{ secrets.TESTS }}
+          HEADLESS: ${{ secrets.HEADLESS }}
+          REPORTER: ${{ secrets.REPORTER }}
+          API_CLIENT: ${{ secrets.API_CLIENT }}
       # Install dependencies
       - name: Install dependencies
         run: npm ci
