@@ -1,6 +1,9 @@
 import { defineConfig, devices } from "@playwright/test";
 
 import * as dotenv from "dotenv";
+import { URL } from "./environment";
+import { apiConfig } from "api/config/apiConfig";
+import suite from "./suites";
 
 dotenv.config();
 
@@ -15,7 +18,7 @@ dotenv.config();
  */
 export default defineConfig({
   globalSetup: require.resolve("./global-setup"),
-  testDir: process.env.TESTS === "UI" ? "../ui/tests" : "../api/tests",
+  testDir: suite,
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -45,6 +48,7 @@ export default defineConfig({
 
     /* Screenshot on failure. */
     screenshot: "only-on-failure",
+    baseURL: process.env.TESTS === "UI" ? URL : apiConfig.baseURL,
   },
 
   /* Configure projects for major browsers */

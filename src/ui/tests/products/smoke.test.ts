@@ -7,17 +7,18 @@ import { Products } from "utils/entities/index";
 const test = mergeTests(testPageFactory, testProduct);
 
 test.describe("test", () => {
-  test("[Products]. [Open details modal for created product]", async ({ salesPortal, createProductViaApi }) => {
+  test.beforeEach(async ({ salesPortal }) => {
     await salesPortal.signInPage.openSalesPortal();
     await salesPortal.signInPage.signInAsAdmin();
+  });
+
+  test("[Products]. [Open details modal for created product]", async ({ salesPortal, createProductViaApi }) => {
     const product = await createProductViaApi();
     await salesPortal.homePage.openProductsPage();
     await salesPortal.productsListPage.openDetailsModalForCreatedProduct(product.name);
   });
 
   test("[Products]. [Create product]", async ({ salesPortal }) => {
-    await salesPortal.signInPage.openSalesPortal();
-    await salesPortal.signInPage.signInAsAdmin();
     await salesPortal.homePage.openProductsPage();
     await salesPortal.productsListPage.openAddNewProductPage();
     const product = generateNewProduct();

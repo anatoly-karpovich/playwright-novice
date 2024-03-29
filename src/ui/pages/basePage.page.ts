@@ -1,28 +1,19 @@
 import { Locator, Page } from "@playwright/test";
 import { ElementState, IWaitUntilOptions, ResizeCoordinates } from "types/core/actions.types";
 import { DEFAULT_TIMEOUT, TIMEOUT_10_SEC } from "utils/timeouts";
-import { isLocator, isLocatorArray } from "utils/typeGuards/selector";
+import { isLocator } from "utils/typeGuards/selector";
 import { IResponse } from "types/api/apiClient.types";
 import { logStep } from "utils/reporter/decorators/logStep";
 
 export class BasePage {
-  // readonly "Notification message" = this.findElement(`.toast-body`);
-  readonly "Spinner" = this.findElement(".spinner-border");
   constructor(protected page: Page) {}
 
   findElement(selectorOrElement: string | Locator) {
-    if (isLocator(selectorOrElement)) {
-      return selectorOrElement;
-    }
-    const element = this.page.locator(selectorOrElement);
-    return element;
+    return isLocator(selectorOrElement) ? selectorOrElement : this.page.locator(selectorOrElement);
   }
 
-  async findElementArray(selectorOrElement: string | Locator[]) {
-    if (isLocatorArray(selectorOrElement)) {
-      return selectorOrElement;
-    }
-    const elements = await this.findElement(selectorOrElement).all();
+  async findElementArray(selectorOrElement: string | Locator) {
+    const elements = isLocator(selectorOrElement) ? await selectorOrElement.all() : await this.findElement(selectorOrElement).all();
     return elements;
   }
 
@@ -214,7 +205,7 @@ export class BasePage {
     );
   }
 
-  async waitForElementsArrayToBeDisplayed(selector: string | Locator[], reverse?: boolean, timeout = DEFAULT_TIMEOUT) {
+  async waitForElementsArrayToBeDisplayed(selector: string | Locator, reverse?: boolean, timeout = DEFAULT_TIMEOUT) {
     await this.waitUntil(async () => {
       const elements = await this.findElementArray(selector);
       for (const element of elements) {

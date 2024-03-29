@@ -5,6 +5,7 @@ import { validateResponse } from "utils/validations/apiValidation";
 import { HTTP_STATUS_CODES } from "data/http/statusCodes";
 import { Products } from "utils/entities/index";
 import { logStep } from "utils/reporter/decorators/logStep";
+import { NOTIFICATION_MESSAGES } from "data/notifications";
 
 export class AddNewProductPage extends SalesPortalPage {
   readonly "Name input" = this.findElement(`#inputName`);
@@ -36,6 +37,7 @@ export class AddNewProductPage extends SalesPortalPage {
     await this.fillProductInputs(product);
     const response = await this.interceptCreateProductResponse();
     await this.waitForSpinnerToHide();
+    await this.verifyAndCloseNotification(NOTIFICATION_MESSAGES.PRODUCT_CREATED);
     Products.addProduct(response.data.Product);
   }
 
