@@ -28,8 +28,21 @@ jobs:
       # Install dependencies
       - name: Install dependencies
         run: npm ci
+
+      # Install browsers
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
+
       # Run Playwright tests
       - name: Run Playwright UI tests
         run: npm run test:ui
+
+      # Create Allure report
+      - name: Create Allure report
+        run: npm run report-create
+
+      - name: Save Allure report
+        uses: actions/upload-artifact@v2
+        with:
+          name: ui-report
+          path: src/report/allure-report
