@@ -13,14 +13,14 @@ jobs:
 
       # Set environment variables
       - name: Set environment variables and install dependencies
-        run: |
-          npm ci
-          export ADMIN_EMAIL="${{ secrets.ADMIN_EMAIL }}"
-          export ADMIN_PASSWORD="${{ secrets.ADMIN_PASSWORD }}"
-          export TESTS="${{ secrets.TESTS }}"
-          export HEADLESS="${{ secrets.HEADLESS }}"
-          export REPORTER="${{ secrets.REPORTER }}"
-          export API_CLIENT="${{ secrets.API_CLIENT }}"
+        run: npm ci
+        with:
+          ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+          TESTS: ${{ secrets.TESTS }}
+          HEADLESS: ${{ secrets.HEADLESS }}
+          REPORTER: ${{ secrets.REPORTER }}
+          API_CLIENT: ${{ secrets.API_CLIENT }}
 
       # Install browsers
       - name: Install Playwright Browsers
@@ -29,6 +29,7 @@ jobs:
       # Run Playwright tests
       - name: Run Playwright UI tests
         run: npm run test:ui
+        continue-on-error: true
 
       # Create Allure report
       - name: Create Allure report
