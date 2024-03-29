@@ -3,12 +3,11 @@ on:
   workflow_dispatch: # Manually trigger the workflow
 jobs:
   test:
+    timeout-minutes: 60
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: lts/*
 
