@@ -38,6 +38,6 @@ export class SalesPortalPage extends BasePage {
 
   @logStep("Open Sales Portal")
   async openSalesPortal() {
-    await this.openPage(URL);
+    await this.openPage("./");
   }
 }
