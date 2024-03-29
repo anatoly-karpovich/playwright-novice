@@ -25,7 +25,11 @@ jobs:
           echo "HEADLESS=${{ secrets.HEADLESS }}" >> $GITHUB_ENV
           echo "REPORTER=${{ secrets.REPORTER }}" >> $GITHUB_ENV
           echo "API_CLIENT=${{ secrets.API_CLIENT }}" >> $GITHUB_ENV
-
+      # Install dependencies
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
       # Run Playwright tests
       - name: Run Playwright UI tests
         run: npm run test:ui
