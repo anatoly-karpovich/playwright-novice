@@ -8,8 +8,9 @@ import { logStep } from "utils/reporter/decorators/logStep";
 export class BasePage {
   constructor(protected page: Page) {}
 
-  findElement(selectorOrElement: string | Locator) {
-    return isLocator(selectorOrElement) ? selectorOrElement : this.page.locator(selectorOrElement);
+  findElement(selectorOrElement: string | Locator, parentElement?: Locator) {
+    if (isLocator(selectorOrElement)) return selectorOrElement;
+    return parentElement ? parentElement.locator(selectorOrElement) : this.page.locator(selectorOrElement);
   }
 
   async findElementArray(selectorOrElement: string | Locator) {

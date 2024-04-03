@@ -12,20 +12,25 @@ export class CreatedProducts {
   }
 
   addProduct(product: IProductFromResponse) {
-    const productIndex = this.products.findIndex((p) => p._id === product._id);
-    if (productIndex !== -1) {
-      this.updateProduct(product, productIndex);
+    const storedProduct = this.products.find((p) => p._id === product._id);
+    if (storedProduct) {
+      this.updateProduct(product);
     } else {
       this.products.push(product);
     }
   }
 
-  updateProduct(product: IProductFromResponse, productIndex: number = this.products.length - 1) {
+  updateProduct(product: IProductFromResponse) {
+    const productIndex = this.findProductIndexById(product._id);
     this.products[productIndex] = product;
   }
 
-  getProduct(productIndex: number = this.products.length - 1) {
-    return this.products[productIndex];
+  getProduct(id?: string) {
+    if (id) {
+      const productIndex = this.findProductIndexById(id);
+      return this.products[productIndex];
+    }
+    return this.products.at(-1);
   }
 
   getAllCreatedProducts() {

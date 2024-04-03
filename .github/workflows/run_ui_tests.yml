@@ -40,5 +40,5 @@ jobs:
       - name: Save Allure report
         uses: actions/upload-artifact@v2
         with:
-          name: ui-report
+          name: api-report
           path: src/report/allure-report

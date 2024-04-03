@@ -1,3 +1,5 @@
+import { IResponseFields } from "types/api/apiClient.types";
+
 export interface IProduct {
   name: string;
   price: number;
@@ -13,10 +15,10 @@ export interface IProductFromResponse extends IProduct {
   createdOn: string;
 }
 
-export interface IProductResponse {
+export interface IProductResponse extends IResponseFields {
   Product: IProductFromResponse;
 }
 
-export interface IProductsResponse {
+export interface IProductsResponse extends IResponseFields {
   Products: IProductFromResponse[];
 }

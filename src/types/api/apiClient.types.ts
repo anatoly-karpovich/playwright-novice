@@ -31,3 +31,8 @@ export interface IPostRequestParams<T> {
   data: T;
   token?: string;
 }
+
+export interface IResponseFields {
+  IsSuccess: boolean;
+  ErrorMessage: string | null;
+}
