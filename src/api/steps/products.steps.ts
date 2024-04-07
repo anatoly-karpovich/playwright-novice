@@ -45,9 +45,15 @@ class ProductApiSteps {
     Products.removeProduct(id);
   }
 
+  async deleteProducts(ids: string[], token?: string) {
+    for (const id of ids) {
+      await this.deleteProduct(id, token);
+    }
+  }
+
   @logStep("Delete all products created during test via API")
-  async deleteAllCreatedProductsDuringTest(token?: string) {
-    const products = Products.getAllCreatedProducts();
+  async deleteAllCreatedProductsDuringTest(createdProducts?: IProductFromResponse[], token?: string) {
+    const products = createdProducts ?? Products.getAllCreatedProducts();
     for (const product of products) {
       await this.deleteProduct(product._id, token);
     }

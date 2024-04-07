@@ -6,7 +6,7 @@ interface IOrderCreationData<T extends ORDER_STATUSES> {
   status: T;
   customerId?: string;
   productsIds?: string[];
-  delivery?: T extends ORDER_STATUSES.DRAFT | ORDER_STATUSES.CANCELED ? IDelivery | DELIVERY_CONDITIONS | undefined : IDelivery | DELIVERY_CONDITIONS;
+  delivery: T extends ORDER_STATUSES.DRAFT | ORDER_STATUSES.CANCELED ? IDelivery | DELIVERY_CONDITIONS | undefined : IDelivery | DELIVERY_CONDITIONS;
 }
 
 interface CustomerFixture {

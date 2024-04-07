@@ -94,7 +94,10 @@ class OrderApiSteps {
   async deleteOrderWithNestedCustomerAndProducts(order: IOrderFromResponse, token?: string) {
     await this.deleteOrder(order._id, token);
     await customersApiSteps.deleteCustomer(order.customer._id, token);
-    await productsApiSteps.deleteAllCreatedProductsDuringTest(token);
+    await productsApiSteps.deleteProducts(
+      order.products.map((p) => p._id),
+      token
+    );
   }
 }
 

@@ -10,7 +10,7 @@ test.describe.only("[UI]. [Orders]", () => {
   test("Order Details", async ({ createOrderViaApi, salesPortal, page }) => {
     await salesPortal.signInPage.openSalesPortal();
     await salesPortal.signInPage.signInAsAdmin();
-    const order = await createOrderViaApi({ status: ORDER_STATUSES.DRAFT });
+    const order = await createOrderViaApi({ status: ORDER_STATUSES.RECEIVED, delivery: DELIVERY_CONDITIONS.DELIVERY });
     await salesPortal.homePage.openOrdersPage();
     const detailButton = `//tr[./td[text()="${order._id}"]]/td/button[@title='Details']`;
     await salesPortal.productsListPage.click(detailButton);
