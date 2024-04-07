@@ -46,6 +46,6 @@ export const test = base.extend<CustomerFixture>({
     };
 
     await use(createdOrderViaApi);
-    if (createdOrder!) await apiSteps.OrderApiSteps.deleteOrderWithNestedCustomerAndProducts(createdOrder._id, Users.getToken());
+    if (createdOrder!) await apiSteps.OrderApiSteps.deleteOrderWithNestedCustomerAndProducts(createdOrder, Users.getToken());
   },
 });
