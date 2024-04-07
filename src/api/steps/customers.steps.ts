@@ -1,4 +1,4 @@
-import customerService from "api/services/customers";
+import customerService from "api/services/customers.service";
 import { HTTP_STATUS_CODES } from "data/http/statusCodes";
 import { generateNewCustomer } from "data/customers/customerGeneration";
 import { ICustomer, ICustomerFromResponse } from "types/customers/customers.types";

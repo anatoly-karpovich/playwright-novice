@@ -49,10 +49,17 @@ export interface IHistory {
   readonly changedOn: string;
 }
 
-export interface IComment {
-  readonly _id?: string;
+export interface ICommentFromResponse {
+  readonly _id: string;
   readonly text: string;
   readonly createdOn: string;
+}
+
+export interface IAddCommentRequest {
+  _id: string;
+  comments: {
+    text: string;
+  };
 }
 
 export interface IOrderData {
@@ -64,6 +71,11 @@ export interface IOrderDataWithId extends IOrderData {
   _id: string;
 }
 
+export interface IOrderStatus {
+  _id: string;
+  status: ORDER_STATUSES.CANCELED | ORDER_STATUSES.IN_PROCESS;
+}
+
 export interface IOrder {
   readonly status: ORDER_STATUSES;
   readonly customer: ICustomerFromResponse;
@@ -72,7 +84,7 @@ export interface IOrder {
   readonly total_price: number;
   readonly createdOn: string;
   readonly history: IHistory[];
-  readonly comments: IComment[];
+  readonly comments: ICommentFromResponse[];
 }
 
 export interface IOrderFromResponse extends IOrder {

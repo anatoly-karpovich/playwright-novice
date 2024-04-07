@@ -25,11 +25,12 @@ test.describe("[UI]. [Products]", () => {
     await salesPortal.addNewProductPage.createProduct(product);
   });
 
-  test.afterEach(async ({ deleteProduct }) => {
+  test.afterEach(async ({ salesPortal, deleteProduct }) => {
     const products = Products.getAllCreatedProducts();
     for (const product of products) {
       await deleteProduct(product._id);
       Products.removeProduct(product._id);
     }
+    // await salesPortal.homePage.signOut();
   });
 });

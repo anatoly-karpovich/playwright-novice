@@ -10,8 +10,8 @@ export function validateResponseWithSchema(response: IResponse, schema: object, 
 
 export function validateResponse(response: IResponse, status: HTTP_STATUS_CODES, IsSuccess?: boolean, ErrorMessage?: null | string) {
   expect(response.status).toBe(status);
-  if (IsSuccess) expect(response.data.IsSuccess).toBe(IsSuccess);
-  if (ErrorMessage) expect(response.data.ErrorMessage).toBe(ErrorMessage);
+  if (IsSuccess !== undefined) expect(response.data.IsSuccess).toBe(IsSuccess);
+  if (ErrorMessage !== undefined) expect(response.data.ErrorMessage).toBe(ErrorMessage);
 }
 
 export function validateSchema(response: IResponse, schema: object) {

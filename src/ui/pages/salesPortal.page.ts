@@ -9,6 +9,8 @@ export class SalesPortalPage extends BasePage {
   readonly "Spinner" = this.findElement(".spinner-border");
   readonly "Notification message" = this.findElement(`.toast-body`);
   readonly "Clost Notification button" = this.findElement(`#toast button`);
+  readonly "Signed in user dropdown" = this.findElement("#dropdownUser1");
+  readonly "Sign out button" = this.findElement("#signOut");
 
   async waitForSpinnerToHide() {
     await this.waitForElement(this.Spinner, "hidden", TIMEOUT_10_SEC);
@@ -37,7 +39,12 @@ export class SalesPortalPage extends BasePage {
   }
 
   @logStep("Open Sales Portal")
-  async openSalesPortal() {
-    await this.openPage("./");
+  async openSalesPortal(url?: string) {
+    await this.openPage(url ?? URL);
+  }
+
+  async signOut() {
+    await this.click(this["Signed in user dropdown"]);
+    await this.click(this["Sign out button"]);
   }
 }

@@ -8,5 +8,9 @@ export const apiConfig = {
     ["Customer By Id"]: (id: string) => `/api/customers/${id}/`,
     ["Orders"]: `/api/orders/`,
     ["Order By Id"]: (id: string) => `/api/orders/${id}/`,
+    ["Order Status"]: `/api/orders/status/`,
+    ["Order Delivery"]: `/api/orders/delivery/`,
+    ["Order Receive"]: `/api/orders/receive/`,
+    ["Order Comments"]: `/api/orders/comments/`,
   },
 };

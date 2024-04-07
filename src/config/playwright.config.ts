@@ -48,7 +48,7 @@ export default defineConfig({
 
     /* Screenshot on failure. */
     screenshot: "only-on-failure",
-    baseURL: process.env.TESTS === "UI" ? URL : apiConfig.baseURL,
+    // baseURL: process.env.TESTS === "UI" ? URL : apiConfig.baseURL,
   },
 
   /* Configure projects for major browsers */
@@ -60,12 +60,12 @@ export default defineConfig({
 
     // {
     //   name: "firefox",
-    //   use: { ...devices["Desktop Firefox"] },
+    //   use: { ...devices["Desktop Firefox"], headless: process.env.HEADLESS === "true" },
     // },
 
     // {
     //   name: "webkit",
-    //   use: { ...devices["Desktop Safari"] },
+    //   use: { ...devices["Desktop Safari"], headless: process.env.HEADLESS === "true" },
     // },
 
     /* Test against mobile viewports. */

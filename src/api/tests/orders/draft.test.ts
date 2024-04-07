@@ -19,7 +19,7 @@ test.describe("[API]. [Orders]", () => {
     token = signInResponse.data.token;
   });
 
-  test("Create smoke order", async ({ services }) => {
+  test("Create draft order", async ({ services }) => {
     const customerData = generateNewCustomer();
     const customerResponse = await services.CustomerService.create({ data: customerData, token });
     createdCustomers.push(customerResponse.data.Customer);
